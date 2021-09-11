@@ -17,21 +17,63 @@ function howManyMovies(movies){
   const findDrama = movies.filter(function(el){
   return el.director === 'Steven Spielberg' && el.genre.indexOf('Drama') != -1;
   })
-  return findDrama.length;
+  return findDrama.length
   console.log(findDrama.length);
 }
 
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
-function scoresAverage() {}
+// .toFixed() doesnt work.
+function scoresAverage(movies){
+  sum = movies.reduce(function(acc, el){ 
+  return (acc + el.score / movies.length);
+}, 0)
+return sum;
+console.log(sum);
+}
+
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
-function dramaMoviesScore() {}
+// .toFixed() doesnt work.
+function dramaMoviesScore(movies) {
+  const dramaScore = movies.filter(function(el){
+  if (el.genre.indexOf('Drama') != -1){
+    sum = movies.reduce(function(acc,el){
+      return acc + el.score / movies.length
+    }, 0)
+  }else{
+    return 0;
+  }
+})
+  return sum;
+  console.log(sum); 
+}
+
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
-function orderByYear() {}
+function orderByYear(movies) {
+  let result = movies.map(function(el){
+    return el.year;
+  })
+  let sorted_year = result.sort(function(a, b){
+return a - b;
+  })
+  return sorted_year;
+  console.log(sorted_year);
+}
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
-function orderAlphabetically() {}
+function orderAlphabetically(movies){
+  let result = movies.map(function(el){
+    return el.title;
+  })
+  var sorted_year = result.sort(function (a, b){
+    if(a.title < b.title) { return -1; }
+    if(a.title > b.title) { return 1; }
+    return 0;
+  })
+  return sorted_year;
+  console.log(sorted_year);
+}
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 function turnHoursToMinutes() {}
