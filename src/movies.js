@@ -28,7 +28,20 @@ return bestDramaSteven.length;
 }
 
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
-function scoresAverage() {}
+function scoresAverage(movies) {
+  if (movies.length === 0) {
+    return 0;
+  }
+  let totalSum = movies.reduce(function (acc, film) {
+      if (isNaN(film.score)) {
+          return Number(acc) + 0
+      }
+      return Number(acc) + Number(film.score);
+  }, 0);
+  
+  let avrgScore = totalSum/movies.length;
+  return Number(avrgScore.toFixed(2));
+}
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
 function dramaMoviesScore() {}

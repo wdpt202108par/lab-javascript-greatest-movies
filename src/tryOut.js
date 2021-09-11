@@ -2001,29 +2001,50 @@ const movies = [
       score: 8
     }
   ];
-
-function getAllDirectorsDirty(movies) {
-    let directors = movies.map(function(film) {
-      return film.director
-    });
-    return directors;
+  
+const fakeMovies = [
+    {
+    title: 'PK',
+    year: 2014,
+    director: 'Rajkumar Hirani',
+    duration: '2h 33min',
+    genre: ['Comedy', 'Drama', 'Fantasy', 'Sci-Fi'],
+    score: 1
+  },
+  {
+    title: 'Dog Day Afternoon',
+    year: 1975,
+    director: 'Sidney Lumet',
+    duration: '2h 5min',
+    genre: ['Biography', 'Crime', 'Drama', 'Thriller'],
+    score: ''
+  },
+  {
+    title: 'Dead Poets Society',
+    year: 1989,
+    director: 'Peter Weir',
+    duration: '2h 8min',
+    genre: ['Comedy', 'Drama'],
+    score: 1
   }
+];
 
-  function getAllDirectors(movies) {
-    let directors = movies.map(function(film) {
-      return film.director
-    });
-    let directorsCleaned = [];
-    for (let director of directors) {
-      if (directorsCleaned.includes(director)) {
-        continue;
-      }
-      else {
-        directorsCleaned.push(director);
-      }
+  function scoresAverage(movies) {
+    if (movies.length === 0) {
+      return 0;
     }
-    return directorsCleaned;
+    let totalSum = movies.reduce(function (acc, film) {
+        if (isNaN(film.score)) {
+            return Number(acc) + 0
+        }
+        return Number(acc) + Number(film.score);
+    }, 0);
+    console.log(totalSum);
+    console.log(movies.length);
+    
+    let avrgScore = totalSum/movies.length;
+    console.log(avrgScore);
+    return avrgScore.toFixed(2);
   }
 
-console.log(getAllDirectorsDirty(movies).length);
-console.log(getAllDirectors(movies).length);
+  scoresAverage([{ score: 6 }, { score: '' }, {}]);
