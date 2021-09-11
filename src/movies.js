@@ -14,7 +14,15 @@ function howManyMovies (movies) {
 }
 
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
-function scoresAverage() {}
+function scoresAverage (movies) {
+  /*records.filter(({gender}) => gender === 'BOYS')
+  .reduce((sum, record) => sum + record.value)*/
+  
+  let average =  movies.filter((movie) => !!movie.score).reduce(function(acc, movie){
+      return acc + movie.score/movies.length;
+  }, 0);
+  return Number(average.toFixed(2));
+}
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
 function dramaMoviesScore() {}
