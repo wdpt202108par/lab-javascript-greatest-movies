@@ -28,16 +28,80 @@ function howManyMovies(movies) {
 
 
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
-function scoresAverage() {}
+
+function scoresAverage(movies) { 
+  
+  // Prevent invalid array -should return 0 if an empty array is passed-
+  if (movies.length === 0) {
+  
+    return 0;
+  
+  } else {
+    
+    // Sum grades of all movies included in the array with the Reduce Method
+
+    let total = movies.reduce((acc, movie) => {
+      
+      if(movie.score) {
+
+        return acc + movie.score;
+      
+      } else {
+        
+        return acc;
+      
+      }
+    }, 0);
+
+    // Calculate average
+    return +((total / movies.length).toFixed(2));
+  }}
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
-function dramaMoviesScore() {}
+
+function dramaMoviesScore(movies) {
+  
+  // Check validity of the array
+  if (!movies.length) {
+  
+    return 0;
+  
+  } else {
+  
+    // Set Drama Movies array with filter method, and includes method -mdn-
+    let dramaMovies = movies.filter((movie) =>
+      movie.genre.includes('Drama')
+    );
+  
+    // Call previous function Score Average applied to Drama Movies
+    return scoresAverage(dramaMovies);
+  }
+}
+
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
 function orderByYear() {}
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
-function orderAlphabetically() {}
+function orderAlphabetically(movies) {
+
+  // Initiate new array to store only movies titles
+  let titles = movies.map(function (movie) {
+    return movie.title
+  });
+
+  // Apply sort method for each element of the array
+  titles.sort(function (a, b) {
+                 
+    //Return sorted values using localCompare Method -MDN- in order to get A to Z sorted list @Najia do you see an easiest way ?
+    return a.localeCompare(b);
+  });
+
+  // Apply splice method to get the first 20 values
+  let _20FirstArr = titles.splice(0, 20);
+
+  return _20FirstArr;
+}
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 function turnHoursToMinutes() {}
