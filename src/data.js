@@ -42,7 +42,7 @@ const movies = [
   {
     title: 'Schindler"s List',
     year: 1993,
-    director: 'Steven Spielberg',
+    director: ' ',
     duration: '3h 15min',
     genre: ['Biography', 'Drama', 'History'],
     score: 8.9
@@ -308,7 +308,7 @@ const movies = [
     year: 1981,
     director: 'Steven Spielberg',
     duration: '1h 55min',
-    genre: ['Action', 'Adventure'],
+    genre: ['Action', 'Adventure', 'Drama'],
     score: 8.5
   },
   {
