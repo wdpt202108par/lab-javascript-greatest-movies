@@ -85,10 +85,11 @@ function orderByYear(movies) {
       if (a.year < b.year) return -1;
       if (a.year > b.year) return 1;
       if (a.year === b.year) {
-        movies.sort((a, b) => (a.title > b.title ? 1 : -1))
-      };
-    })
-  
+          if (a.title < b.title) return -1;
+          if (a.title > b.title) return 1;
+          if (a.title === b.title) return 0;
+        } 
+  });
   return newArray;
 }
 
