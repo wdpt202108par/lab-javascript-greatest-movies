@@ -5,10 +5,10 @@ const movies = require('../src/data');
 // How could you "clean" a bit this array and make it unified (without duplicates)?
 
 function getAllDirectors (movies){
-var allDirectors = movies.map(function hello(array){
+  var allDirectors = movies.map(function hello(array){
   return array.director;
 });
-return allDirectors;
+  return allDirectors;
 }
 
 console.log(allDirectors)
@@ -20,14 +20,14 @@ var movies3 = movies.filter(function(movie) {
   return movie.director === "Steven Spielberg" &&
   movie.genre.includes('Drama');
   });
-return movies3;}
+  return movies3;}
   
 console.log(movies3)
 
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
 
 function scoresAverage(movies) {
-var average = movies.reduce(function(sum, scores){
+  var average = movies.reduce(function(sum, scores){
   return sum + scores.score/250;
   }, 0);
   return average.toFixed(2);
@@ -39,11 +39,11 @@ console.log(average)
 
 function dramaMoviesScore(dramaScore) {
   var dramamovie = dramaScore.filter(function (film){
-    return film.genre.includes(`Drama`)
+  return film.genre.includes(`Drama`)
   },0);
  
   var averageScore = dramamovie.reduce(function(avg, scores) {
-    return avg + (scores.score)/dramamovie.length
+  return avg + (scores.score)/dramamovie.length
   },0);
   return averageScore.toFixed(2)
 };
@@ -64,7 +64,24 @@ function orderByYear(date) {
 console.log(orderByYear(movies))
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
-function orderAlphabetically() {}
+function orderAlphabetically (movies){
+  const ordertitle = movies.map(function(titles){
+    return titles.title;
+    });
+    return ordertitle;
+
+    ordertitle.sort (function compare(a, b){
+    if(a.title < b.title) { return -1; }
+    if(a.title > b.title) { return 1; }
+    return 0;
+  });
+
+    const twentytitles = ordertitle.slice(0, 20); 
+
+    return twentytitles;
+
+};
+  console.log(orderAlphabetically(movies));
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 function turnHoursToMinutes() {}
