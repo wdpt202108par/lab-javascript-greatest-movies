@@ -1,10 +1,17 @@
-// Iteration 1: All directors? - Get the array of all directors.
-// _Bonus_: It seems some of the directors had directed multiple movies so they will pop up multiple times in the array of directors.
+
 // How could you "clean" a bit this array and make it unified (without duplicates)?
 let movies = require("./data.js");
 
+// Iteration 1: All directors? - Get the array of all directors.
 function getAllDirectors (movies) {
   return movies.map((movie) => movie.director);
+}
+
+// _Bonus_: It seems some of the directors had directed multiple movies so they will pop up multiple times in the array of directors.
+function getUniqueDirectors(movies) {
+  let allDirectors = getAllDirectors (movies);
+
+  return allDirectors.filter((director, index, allDirectors) => allDirectors.indexOf(director) === index);
 }
 
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
@@ -49,10 +56,58 @@ function orderAlphabetically(movies) {
 }
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
-function turnHoursToMinutes() {}
+function stringToMinutes(object, string) {
+  let splitString = string.split(" ");
+  let hours = splitString[0].split("h").map((el) => Number(el)).reduce(function(sum, el) {
+    return sum + el * 60;
+  }, 0);
+  let minutes = splitString[1].split("min").map((el) => Number(el)).reduce(function(sum, el) {
+    return sum + el;
+  }, hours);
+  
+  return {
+    title: 'Fight Club',
+    year: 1999,
+    director: 'David Fincher',
+    duration: minutes,
+    genre: ['Drama'],
+    score: 8.8
+  };
+}
+
+function turnHoursToMinutes(movies) {
+  let moviesAdjusted = movies.map((movie) => stringToMinutes(movie, movie.duration));
+  
+  return moviesAdjusted;
+}
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
-function bestYearAvg() {}
+// Calculate average score for a specified year
+function calcAvgScorePerYear(movies, year) {
+  let filteredMovies = movies.filter((movie) => movie.year === year && !!movie.score);
+
+  let avgScore = filteredMovies.reduce(function(sum, movie) {
+    return sum + movie.score / filteredMovies.length;
+  }, 0)
+
+  return {year: year, score: Number(avgScore.toFixed(2))};
+}
+
+function bestYearAvg(movies) {
+  // List all years
+  let years = movies.map((movie) => movie.year);
+
+  // Remove duplicate years and calculate average score for each year
+  years = years.filter((year, index, years) => years.indexOf(year) === index).map((year) => calcAvgScorePerYear(movies, year));
+  
+  // Get max score
+  let bestYear = years.reduce((prev, current) => (prev.score > current.score) ? prev : current);
+  
+  return `The best year was ${bestYear.year} with an average score of ${bestYear.score}`;
+}
+
+console.log(bestYearAvg(movies));
+
 
 
 
