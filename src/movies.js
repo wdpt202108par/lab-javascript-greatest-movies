@@ -23,12 +23,19 @@ function howManyMovies(movies){
 
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
 // .toFixed() doesnt work.
+
+
 function scoresAverage(movies){
-  sum = movies.reduce(function(acc, el){ 
-  return (acc + el.score / movies.length);
+  sum = movies.reduce(function(acc, el){
+    if(movies.length <= 0){
+      return 0;
+    }else if(el.scroe == 0 || acc.score == 0){ // it's not working....
+      return acc + el.score;
+    }else{
+      return (acc + el.score / movies.length);
+    }
 }, 0)
-return sum;
-console.log(sum);
+return (Number(sum.toFixed(2)));
 }
 
 
@@ -36,16 +43,10 @@ console.log(sum);
 // .toFixed() doesnt work.
 function dramaMoviesScore(movies) {
   const dramaScore = movies.filter(function(el){
-  if (el.genre.indexOf('Drama') != -1){
-    sum = movies.reduce(function(acc,el){
-      return acc + el.score / movies.length
-    }, 0)
-  }else{
-    return 0;
-  }
-})
-  return sum;
-  console.log(sum); 
+  return el.genre.includes("Drama")
+    })
+    return scoresAverage(dramaScore);
+   // return ((acc + el.score / movies.length) * 100) /100;
 }
 
 
@@ -66,13 +67,15 @@ function orderAlphabetically(movies){
   let result = movies.map(function(el){
     return el.title;
   })
-  var sorted_year = result.sort(function (a, b){
-    if(a.title < b.title) { return -1; }
-    if(a.title > b.title) { return 1; }
+ sorted_year = result.sort(function (a, b){
+    if(a.title < b.title){
+      return -1; 
+    }else if(a.title > b.title){
+    return 1; 
+  }else
     return 0;
   })
-  return sorted_year;
-  console.log(sorted_year);
+  return sorted_year.splice(0,20);
 }
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
