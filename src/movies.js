@@ -48,7 +48,45 @@ function dramaMoviesScore(movies) {
 }
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
-function orderByYear() {}
+function orderByYear(movies) {
+  var moviesByYear = movies.map (function(film) {
+    return film
+  });
+  let sortByYear = moviesByYear.sort(function(a, b) {
+    if (a.year<b.year) {
+      return -1
+    } else if (b.year<a.year) {
+      return 1
+    } else {
+      if (a.title<b.title) {
+        return -1
+      } else if (b.title<a.title) {
+        return 1
+      } else {
+        return 0
+      }
+   }
+  });
+ return sortByYear;
+}
+
+/*autre solution plus poussée est de trier à la fois sur le titre et l'année:
+function orderByYear(movies) {
+  var moviesByYear = movies.map (function(film) {
+    return film
+  });
+  let keya = `${a.year} ${a.title}`;
+  let keyb = `${b.year} ${b.title}`;
+  if (keya<keyb) {
+    return -1
+  } else if (keyb<keya) {
+    return 1
+  } else {
+    return 0
+  };
+ return sortByYear;
+}
+console.log(orderByYear(movies));*/
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
 function orderAlphabetically() {}
