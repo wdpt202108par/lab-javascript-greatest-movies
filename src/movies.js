@@ -25,19 +25,27 @@ function howManyMovies(movies) {
   return dramaSpielberg.length;
 }
 
-//console.log()
-
-
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
 function scoresAverage(movies) {
-  const resultScoresAverage = movies.reduce(function (sum, film) {
-    return sum += film.score;
+  if (movies.length === 0) {
+    return 0;
+  }
+  let filmWithScore = movies.filter(function (film) {
+    return film.score !== undefined;
+  });
+  let resultScoresAverage = filmWithScore.reduce(function (sum, film) {
+    return sum + film.score; 
   }, 0);
-  return Math.round((resultScoresAverage/movies.length) *100) / 100;
+  return Math.round((resultScoresAverage/ movies.length) * 100)/100;
 };
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
-function dramaMoviesScore() {}
+function dramaMoviesScore(movies) {
+  var dramaMovies = movies.filter(function(categorie) {
+    return categorie.genre.includes("Drama");
+  });
+  return scoresAverage(dramaMovies)
+}
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
 function orderByYear() {}
